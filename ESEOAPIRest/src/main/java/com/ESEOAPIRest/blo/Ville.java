@@ -1,4 +1,4 @@
-package com.ESEOAPIRest.dto;
+package com.ESEOAPIRest.blo;
 
 public class Ville {
 	private String codeCommuneINSEE;
@@ -68,6 +68,12 @@ public class Ville {
 	}
 	public void setLongitude(String longitude) {
 		this.longitude = longitude;
+	}
+	
+	public String toString() {
+		return this.getClass().getSimpleName()+" [ codeCommuneINSEE="+this.codeCommuneINSEE+", nomCommune="+this.nomCommune+
+				", codePostal="+this.codePostal+", libelleAcheminement="+this.libelleAcheminement+
+				", ligne5="+this.ligne5+", latitude="+this.latitude+", longitude="+this.longitude+" ]";
 	}
 	
 }

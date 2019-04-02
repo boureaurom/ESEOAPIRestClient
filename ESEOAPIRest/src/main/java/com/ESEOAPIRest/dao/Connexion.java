@@ -1,8 +1,15 @@
 package com.ESEOAPIRest.dao;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
+
+import com.ESEOAPIRest.App;
 
 public class Connexion {
 	public static Connection connexion;
@@ -11,8 +18,24 @@ public class Connexion {
 			return connexion;
 		}else {
 			try {
-				connexion = DriverManager.getConnection(null, null, null );
+				Properties prop = new Properties();
+				InputStream input = null;
+				String filename="application.properties";
+				
+				input = App.class.getClassLoader().getResourceAsStream(filename);
+	    		if(input!=null){
+	    			prop.load(input);
+	    			
+	    			connexion = DriverManager.getConnection(prop.getProperty("BDD.url"), prop.getProperty("BDD.user"), prop.getProperty("BDD.password"));
+	    		}
+				
 			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
