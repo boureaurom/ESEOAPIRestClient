@@ -129,9 +129,10 @@ private String tableName = "ville_france";
 			Connection conn = Connexion.getInstance();
 			String query="";
 			if(filtreRequete!="") {
-				query = "UPDATE "+tableName+" SET "+filtreRequete+" = "+newValue+" WHERE Code_commune_INSEE="+CodeCommuneInsee;
+				System.out.println(newValue);
+				query = "UPDATE "+tableName+" SET "+filtreRequete+" = '"+newValue+"' WHERE Code_commune_INSEE="+CodeCommuneInsee;
 			}
-			
+			System.out.println(query);
 			PreparedStatement prepare = conn.prepareStatement(query,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			
 			prepare.executeUpdate();
@@ -189,7 +190,7 @@ private String tableName = "ville_france";
 			if(filtreRequete=="") {
 				query = "SELECT * FROM "+tableName;
 			}else {
-				query = "SELECT * FROM "+tableName+" WHERE "+filtreRequete+" = "+value;
+				query = "SELECT * FROM "+tableName+" WHERE "+filtreRequete+" = '"+value+"'";
 			}
 			
 

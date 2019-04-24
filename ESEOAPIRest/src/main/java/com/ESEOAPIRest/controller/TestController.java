@@ -1,5 +1,6 @@
 package com.ESEOAPIRest.controller;
 
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -63,23 +64,10 @@ public class TestController {
 	
 	@RequestMapping(value="/post", method=RequestMethod.POST)
 	@ResponseBody
-	public boolean post(@RequestParam(required = true, value="codeCommuneInsee") String codeCommuneInsee, 
-			@RequestParam(required = true, value="nomCommune") String nomCommune,
-			@RequestParam(required = true, value="codePostal") String codePostal,
-			@RequestParam(required = true, value="libelleAcheminement") String libelleAcheminement, 
-			@RequestParam(required = true, value="Ligne_5") String ligne5,
-			@RequestParam(required = true, value="latitude") String latitude, 
-			@RequestParam(required = true, value="longitude") String longitude) {
+	public boolean post(
+			@RequestBody(required = true) Ville ville) {
 		System.out.println("Appel POST");
 		ListeVilleDAO villes = new ListeVilleDAO();
-		Ville ville = new Ville();
-		ville.setCodeCommuneINSEE(codeCommuneInsee);
-		ville.setCodePostal(codePostal);
-		ville.setLatitude(latitude);
-		ville.setLibelleAcheminement(libelleAcheminement);
-		ville.setLigne5(ligne5);
-		ville.setLongitude(longitude);
-		ville.setNomCommune(nomCommune);
 		boolean result=villes.creationVille(ville);
 		return result;
 	}
