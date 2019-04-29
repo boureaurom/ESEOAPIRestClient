@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@page import="com.ESEOAPIRest.blo.*"%>
 <%@page import="com.ESEOAPIRestClient.dto.*"%>
+<%@page import="java.lang.String"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,8 @@
 <title>Villes</title>
 </head>
 <body>
+
+	<a href="tableauVille.jsp">Liste des Villes</a>
 	<%
 		DTOVille dto = new DTOVille();
 		Ville[] toutesVille = dto.getTouteVilles();
@@ -47,7 +50,7 @@
     
     %>
     </SELECT>
-    <input type="submit" value="submitButton" name="submitButton"/>
+    <input type="submit" value="Confirm" name="submitButton"/>
     </form>
 	
 </body>

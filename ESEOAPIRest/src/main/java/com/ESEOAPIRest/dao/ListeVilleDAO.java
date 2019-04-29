@@ -94,44 +94,21 @@ private String tableName = "ville_france";
 	    }
 		return villes;
 	}
-	public boolean modifier(String CodeCommuneInsee, int filtre, String newValue) {
+	public boolean modifier(String CodeCommuneInsee, Ville ville) {
 		boolean init=false;
-		 String filtreRequete;
-	      switch(filtre)
-	    	        {
-	                case 1:
-	                	filtreRequete="Code_commune_INSEE";
-	                break;
-	                case 2:
-	                	filtreRequete="Nom_commune";
-	                break;
-	                case 3:
-	                	filtreRequete="Code_postal";
-	                break;
-	                case 4:
-	                	filtreRequete="Libelle_acheminement";
-	                break;
-	                case 5:
-	                	filtreRequete="Ligne_5";
-	                break;
-	                case 6:
-	                	filtreRequete="Latitude";
-	                break;
-	                case 7:
-	                	filtreRequete="Longitude";
-	                break;
-	                default:
-	                	filtreRequete="";
-	                break;
-	            }
+		
 		
 		try {
 			Connection conn = Connexion.getInstance();
-			String query="";
-			if(filtreRequete!="") {
-				System.out.println(newValue);
-				query = "UPDATE "+tableName+" SET "+filtreRequete+" = '"+newValue+"' WHERE Code_commune_INSEE="+CodeCommuneInsee;
-			}
+			String query="UPDATE "+tableName+" SET Code_commune_INSEE='"+ville.getCodeCommuneINSEE()+"'";
+			query+=", Nom_commune='"+ville.getNomCommune()+"'";
+			query+=", Code_postal='"+ville.getCodePostal()+"'";
+			query+=", Libelle_acheminement='"+ville.getLibelleAcheminement()+"'";
+			query+=", Ligne_5='"+ville.getLigne5()+"'";
+			query+=", Latitude='"+ville.getLatitude()+"'";
+			query+=", Longitude='"+ville.getLongitude()+"'";
+			query+=" WHERE Code_commune_INSEE='"+CodeCommuneInsee+"'";
+			
 			System.out.println(query);
 			PreparedStatement prepare = conn.prepareStatement(query,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			

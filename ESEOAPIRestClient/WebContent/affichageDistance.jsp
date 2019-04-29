@@ -8,5 +8,12 @@
 </head>
 <body>
 		La distance est de : <%= request.getAttribute("distance") %> km
+		
+		
+		<br>
+		
+		<form type="post" action="Client.jsp">
+				<input type="submit" value="Retour à la sélection des villes" name="submitButton"/>
+    			</form>
 </body>
 </html>

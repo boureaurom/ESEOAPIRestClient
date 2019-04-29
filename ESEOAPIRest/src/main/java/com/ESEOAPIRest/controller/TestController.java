@@ -1,5 +1,8 @@
 package com.ESEOAPIRest.controller;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -72,23 +75,21 @@ public class TestController {
 		return result;
 	}
 	
-	@RequestMapping(value="/put", method=RequestMethod.PUT)
+	@PutMapping(value="/put/{codeCommuneInsee}")
 	@ResponseBody
-	public boolean put(@RequestParam(required = true, value="codeCommuneInsee") String codeCommuneInsee, 
-			@RequestParam(required = true, value="filter") String filter, 
-			@RequestParam(required = true, value="newValue") String newValue) {
+	public boolean put(@PathVariable String codeCommuneInsee, 
+			@RequestBody(required = true) Ville ville) {
 		System.out.println("Appel PUT");
 		ListeVilleDAO villes = new ListeVilleDAO();
-		int filterint =Integer.parseInt(filter);
-		boolean result=villes.modifier(codeCommuneInsee, filterint, newValue);
+		boolean result=villes.modifier(codeCommuneInsee, ville);
 		
 		   
 		return result;
 	}
 	
-	@RequestMapping(value="/delete", method=RequestMethod.DELETE)
+	@DeleteMapping(value="/delete/{codeCommuneInsee}")
 	@ResponseBody
-	public boolean delete(@RequestParam(required = true, value="codeCommuneInsee") String codeCommuneInsee) {
+	public boolean delete(@PathVariable String codeCommuneInsee) {
 		ListeVilleDAO villes = new ListeVilleDAO();
 		boolean result=villes.suppressionVille(codeCommuneInsee);
 		System.out.println("Appel DELETE");
